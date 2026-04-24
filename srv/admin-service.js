@@ -6,7 +6,7 @@ module.exports = (srv) => {
         
         console.log(`[MOCK AZURE AD] Weryfikacja tożsamości dla: ${each.name}... OK`);
         
-        // Dodajemy wirtualną flagę z Azure do naszego API
+        // Mockowanie statusu z entra id (azure ad)
         each.department += ' (Verified via Azure Mock)';
     });
 };
