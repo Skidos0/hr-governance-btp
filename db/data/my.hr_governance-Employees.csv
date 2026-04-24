@@ -1,0 +1,5 @@
+ID;name;role;department;cloud_access_level
+1;Jan Kowalski;Cloud Architect;IT Infrastructure;Admin
+2;Anna Nowak;Junior Python Developer;Digital HR;Developer
+3;Marek Zielinski;IT Security Officer;Compliance;Auditor
+4;Karolina Wisniewska;HR Specialist;People & Culture;HR_Viewer
