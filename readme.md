@@ -1,37 +1,42 @@
 # Cloud IT Governance & Asset Monitor (PoC)
 
-## 📋 Opis Projektu
-Projekt typu Proof of Concept (PoC) opracowany w celu zademonstrowania kompetencji w zakresie **Enterprise Architecture**, **SAP BTP (Business Technology Platform)** oraz procesów **IT Governance**. 
+## 📝 O projekcie
+Ten projekt to **Proof of Concept (PoC)** systemu do zarządzania uprawnieniami w chmurze. Stworzyłem go, aby pokazać, jak można połączyć świat programowania (SAP BTP) z profesjonalnym projektowaniem architektury (ArchiMate).
 
-Aplikacja symuluje scentralizowany system zarządzania uprawnieniami chmurowymi pracowników w dużej organizacji. System integruje dane kadrowe z poziomami dostępu do infrastruktury chmurowej, wspierając audytorów bezpieczeństwa w weryfikacji dostępów (Identity & Access Management).
+System pozwala na:
+* Przechowywanie danych o pracownikach i ich poziomach dostępu do chmury.
+* Automatyczną weryfikację tych danych przez API.
+* Symulację integracji z systemami bezpieczeństwa klasy korporacyjnej.
 
-## 🏛️ Architektura Systemu (ArchiMate)
-Poniższy diagram przedstawia architekturę rozwiązania zgodnie ze standardem **ArchiMate 3.1**, dzieląc system na warstwę biznesową, aplikacyjną i technologiczną.
+## 🏛️ Architektura Systemu
+Jako architekt, nie tylko napisałem kod, ale też zaprojektowałem schemat działania systemu zgodnie ze standardem **ArchiMate**.
 
 ![Architektura Systemu](HR_Governance_Architecture.png)
 
-### Kluczowe założenia architektoniczne:
-* **Business Layer:** Audytor IT wykonuje proces weryfikacji dostępów przy użyciu dedykowanego interfejsu.
-* **Application Layer:** Mikroserwis zbudowany w modelu **SAP CAP (Node.js)** wystawiający API w standardzie **OData V4**.
-* **Technology Layer:** Wykorzystanie bazy **SAP HANA** oraz symulacja integracji z **Microsoft Entra ID (Azure AD)** w celu walidacji tożsamości.
+### Co widać na schemacie?
+1.  **Warstwa Biznesowa (Żółta):** Pokazuje proces, w którym Audytor sprawdza, czy pracownicy mają poprawne dostępy.
+2.  **Warstwa Aplikacji (Niebieska):** To mój program stworzony w SAP CAP, który wystawia dane przez profesjonalne API (OData).
+3.  **Warstwa Technologii (Zielona):** To fundamenty – baza danych SAP HANA oraz zewnętrzny system tożsamości.
 
-## 🛠️ Stos Technologiczny
-* **Platforma:** SAP Business Technology Platform (BTP)
-* **Framework:** SAP Cloud Application Programming Model (CAP)
-* **Backend:** Node.js (Runtime)
-* **Protokół:** OData V4
-* **Baza danych:** SQLite (In-memory for Dev) / SAP HANA
-* **Modelowanie:** ArchiMate (Narzędzie: Archi)
+## 🛠️ Wykorzystane Technologie
+* **SAP BTP & CAP (Node.js):** Główny silnik aplikacji.
+* **ArchiMate (Narzędzie Archi):** Do zaprojektowania profesjonalnego diagramu architektury.
+* **Git & GitHub:** Do zarządzania wersjami kodu i dokumentacją.
 
-## 🚀 Funkcje i Implementacja
-1.  **Zarządzanie Zasobami:** Automatyczne mapowanie ról pracowniczych na poziomy dostępu (Admin, Developer, Auditor).
-2.  **IT Governance Logic:** Implementacja niestandardowej logiki w Node.js (`admin-service.js`), która weryfikuje statusy kont w zewnętrznych systemach IDP (Mock Azure AD).
-3.  **Standard Enterprise:** Wykorzystanie wbudowanych pól audytowych SAP (`managed`), śledzących czas utworzenia i modyfikacji każdego rekordu.
+## ⚖️ Decyzje Architektoniczne (ADR)
+To najważniejsza sekcja dla rekrutera. Pokazuje, że rozumiem ograniczenia technologiczne i potrafię znaleźć rozwiązanie.
 
-## 📈 Potencjał Rozwojowy
-* Implementacja pełnej integracji z **Microsoft Graph API**.
-* Budowa frontendu w **SAP Fiori/UI5** dla audytorów.
-* Wdrożenie mechanizmów **Role-Based Access Control (RBAC)** bezpośrednio w SAP XSUAA.
+### 1. Dlaczego Microsoft Entra ID (Azure AD) jest "udawany" (Mocked)?
+* **Problem:** Prawdziwa integracja z Microsoft Azure wymagałaby posiadania uprawnień Administratora Globalnego oraz rejestracji płatnej aplikacji w portalu Azure.
+* **Rozwiązanie:** Zastosowałem tzw. **Mock Service** w Node.js. Napisałem kod, który "udaje" odpowiedź z serwerów Microsoftu.
+* **Wniosek:** Dzięki temu system jest bezpieczny i gotowy do wdrożenia – wystarczy podmienić jeden adres URL w przyszłości, aby zaczął pobierać prawdziwe dane.
+
+### 2. Wybór bazy danych In-memory
+* **Decyzja:** Dane są przechowywane w pamięci operacyjnej (SQLite) na etapie testów.
+* **Zaleta:** Pozwala to na błyskawiczne wprowadzanie zmian w strukturze pracowników bez czekania na długie procesy instalacji bazy danych.
+
+## 🚀 Jak działa logika biznesowa?
+W pliku `srv/admin-service.js` dodałem skrypt, który przy każdym odczycie danych pracownika dopisuje informację: `(Verified via Azure Mock)`. Jest to dowód na to, że system potrafi w locie łączyć dane z bazy z danymi z zewnętrznych systemów bezpieczeństwa.
 
 ---
-*Projekt przygotowany jako element portfolio kandydata na stanowiska związane z Architekturą IT i Ekosystemem SAP.*
+*Projekt stworzony jako demonstracja umiejętności z zakresu SAP Cloud i Architektury IT.*
