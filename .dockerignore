@@ -1,0 +1,10 @@
+# Ignore files
+node_modules
+.github
+HR_Governance_Architecture.png
+readme.md
+test.http
+.gitignore
+Dockerfile
+*.sqlite
+.vscode

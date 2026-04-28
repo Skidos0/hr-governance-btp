@@ -2,13 +2,29 @@
   "name": "hr_governance",
   "version": "1.0.0",
   "dependencies": {
-    "@sap/cds": "^9"
+    "@sap/cds": "^8"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^2"
+    "@cap-js/sqlite": "^1"
   },
   "scripts": {
     "start": "cds-serve"
   },
-  "private": true
+  "cds": {
+    "requires": {
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "alice": {
+            "roles": ["Admin"],
+            "password": "password"
+          },
+          "bob": {
+            "roles": ["Auditor"],
+            "password": "password"
+          }
+        }
+      }
+    }
+  }
 }

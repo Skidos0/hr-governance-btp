@@ -1,0 +1,8 @@
+GET http://localhost:4004/odata/v4/admin/Employees
+Authorization: Basic alice:password
+###
+GET http://localhost:4004/odata/v4/admin/Employees
+Authorization: Basic bob:password
+###
+DELETE http://localhost:4004/odata/v4/admin/Employees(ID=1,IsActiveEntity=true)
+Authorization: Basic bob:password
